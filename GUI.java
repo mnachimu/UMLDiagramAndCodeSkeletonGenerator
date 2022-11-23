@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 
 
 public class GUI extends JFrame implements ActionListener {
+	
+	public CanvasPanel canvas;
 
     public GUI() {
         this.setTitle("CSE 564 Assignment Final");
@@ -14,9 +16,11 @@ public class GUI extends JFrame implements ActionListener {
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   // Exit out of application on click
 	    this.getContentPane().setBackground(Color.gray);
 	    
-	    CanvasPanel canvas = new CanvasPanel(150, 30);
+	    canvas = new CanvasPanel(400, 30);
 	    
 	    this.add(canvas);
+	    
+	    this.setLayout(null);
     }
 
     @Override

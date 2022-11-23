@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.awt.*;
 
 public class ClassObject {
@@ -9,6 +10,9 @@ public class ClassObject {
 	public ClassObject(int x, int y) {
 		
 		bounds = new Rectangle(x, y, FIXED_WIDTH, FIXED_HEIGHT);
+		
+		System.out.println("New ClassObject created at (" + getX() + ", " + getY() + ")");
+		
 	}
 	
 	public int getX() {
@@ -19,9 +23,11 @@ public class ClassObject {
 		return bounds.y;
 	}
 	
-	public void draw(Graphics g) {		
-		g.setColor(Color.red);
+	public void draw(Graphics g) {
+		g.setColor(new Color(242, 213, 145));
 		g.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
 	}
+	
+
 	
 }

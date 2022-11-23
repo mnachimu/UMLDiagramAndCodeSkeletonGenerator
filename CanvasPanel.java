@@ -1,17 +1,25 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.List;
+import java.util.ArrayList;
 
 public class CanvasPanel extends JPanel implements MouseListener, MouseMotionListener {
 	
+	List<ClassObject> objects;
+	
 	public CanvasPanel(int x, int y) {
 		this.setBackground(Color.white);
-		this.setBounds(x, y, 500, 450);
+		this.setBounds(x, y, 625, 600);
     	this.setLayout(new BorderLayout());
     	this.setBorder(BorderFactory.createLineBorder(Color.black, 1));
     	
     	addMouseListener(this);
     	addMouseMotionListener(this);
+	}
+	
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 	}
 	
 	@Override
