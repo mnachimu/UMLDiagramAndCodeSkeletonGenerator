@@ -8,13 +8,13 @@ public class GUI extends JFrame implements ActionListener {
 
     public GUI() {
         this.setTitle("CSE 564 Assignment Final");
-        this.setSize(700, 650);
+        this.setSize(1050, 700);
 	    this.setVisible(true);
 	    this.setResizable(false);
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   // Exit out of application on click
 	    this.getContentPane().setBackground(Color.gray);
 	    
-	    CanvasPanel canvas = new CanvasPanel(50, 30);
+	    CanvasPanel canvas = new CanvasPanel(150, 30);
 	    
 	    this.add(canvas);
     }

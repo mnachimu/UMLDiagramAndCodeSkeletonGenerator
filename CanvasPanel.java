@@ -6,7 +6,7 @@ public class CanvasPanel extends JPanel implements MouseListener, MouseMotionLis
 	
 	public CanvasPanel(int x, int y) {
 		this.setBackground(Color.white);
-		this.setBounds(x, y, 600, 550);
+		this.setBounds(x, y, 500, 450);
     	this.setLayout(new BorderLayout());
     	this.setBorder(BorderFactory.createLineBorder(Color.black, 1));
     	
@@ -19,6 +19,9 @@ public class CanvasPanel extends JPanel implements MouseListener, MouseMotionLis
 		// TODO Auto-generated method stub
 		System.out.println("Mouse clicked at ("
 				+ e.getX() + ", " + e.getY() + ")");
+		ClassObject o = new ClassObject(e.getX(), e.getY());
+		
+		repaint();
 	}
 
 	@Override
