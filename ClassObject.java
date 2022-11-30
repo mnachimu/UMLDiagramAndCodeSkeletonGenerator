@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.awt.*;
 
 public class ClassObject {
@@ -6,8 +5,8 @@ public class ClassObject {
     private String className;
     private Coordinates coordinates;
     private Rectangle bounds;
-    private final static int FIXED_WIDTH = 50;
-    private final static int FIXED_HEIGHT = 25;
+    private final static int FIXED_WIDTH = 120;
+    private final static int FIXED_HEIGHT = 30;
 
     public ClassObject(int x, int y) {
 
@@ -45,9 +44,17 @@ public class ClassObject {
         return bounds.contains(x, y);
     }
 
+    public void displayName(Graphics g) {
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("Courier", Font.BOLD, 14));
+        g.drawString(className, bounds.x + 30, bounds.y + 20);
+
+    }
+
     public void draw(Graphics g) {
         g.setColor(new Color(242, 213, 145));
         g.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
+        displayName(g);
     }
 
     public void selectedState(Graphics g) {
@@ -59,5 +66,9 @@ public class ClassObject {
     public void unselectedState(Graphics g) {
         g.setColor(new Color(242, 213, 145));
         g.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
+    }
+
+    private Point center() { // can be removed
+        return new Point((bounds.x + bounds.width) / 2, (bounds.y + bounds.height / 2));
     }
 }

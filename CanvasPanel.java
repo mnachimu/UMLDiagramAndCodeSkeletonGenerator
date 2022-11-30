@@ -23,6 +23,7 @@ public class CanvasPanel extends JPanel implements MouseListener, MouseMotionLis
 		canvas = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 //		objects = new ArrayList<ClassObject>();
 		dataSource = DataSource.getInstance();
+
 		this.setBackground(Color.white);
 		this.setBounds(x, y, width, height);
     	this.setLayout(new BorderLayout());
@@ -84,7 +85,18 @@ public class CanvasPanel extends JPanel implements MouseListener, MouseMotionLis
 			dataSource.addRelationship(currentRelationshipType, dataSource.selectedObject, click);
 			dataSource.selectedObject = -1;
 		} else if (click == -1) {
-			dataSource.addClassObject(new ClassObject(e.getX(), e.getY()));
+			ClassObject o = new ClassObject(e.getX(), e.getY());
+			dataSource.addClassObject(o);
+			String name = (String)JOptionPane.showInputDialog(
+					e.getComponent(),
+					"Enter the new class name",
+					"Class Name",
+					JOptionPane.PLAIN_MESSAGE,
+					null,
+					null,
+					"Default");
+			if ((name != null) && (name.length() > 0))
+				o.setClassName(name);
 		} else {
 			dataSource.selectedObject = click;
 		}
