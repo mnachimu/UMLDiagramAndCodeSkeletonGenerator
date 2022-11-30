@@ -2,8 +2,11 @@ public class UMLDiagramAndSkeletonGenerator {
 
     public static void main(String[] args) {
         System.out.println("Hello, World!");
+        CanvasPanel canvas = new CanvasPanel(400, 30);
+        GUI plotPanel = new GUI(canvas);
 
-        GUI plotPanel = new GUI();
+        CanvasPanelController controller = new CanvasPanelController(canvas);
+        DataSource.getInstance().addObserver(canvas);
     }
 
 }

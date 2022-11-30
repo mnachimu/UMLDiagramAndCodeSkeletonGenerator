@@ -46,4 +46,14 @@ public class DataSource extends Observable {
         notifyObservers();
     }
 
+    public void setSelectedObject(int i) {
+        selectedObject = i;
+        setChanged();
+        notifyObservers();
+    }
+
+    public int getSelectedObject() {
+        return this.selectedObject;
+    }
+
 }

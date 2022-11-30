@@ -7,11 +7,8 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-public class CanvasPanel extends JPanel implements MouseListener, MouseMotionListener, Observer {
-	
-//	List<ClassObject> objects;
-	Relationship currentRelationshipType = Relationship.AGGREGATION;
-	DataSource dataSource;
+public class CanvasPanel extends JPanel implements Observer {
+	// view
 	private static final int width = 625;
 	private static final int height = 600;
 	
@@ -21,16 +18,11 @@ public class CanvasPanel extends JPanel implements MouseListener, MouseMotionLis
 
 	public CanvasPanel(int x, int y) {
 		canvas = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-//		objects = new ArrayList<ClassObject>();
-		dataSource = DataSource.getInstance();
 
 		this.setBackground(Color.white);
 		this.setBounds(x, y, width, height);
     	this.setLayout(new BorderLayout());
     	this.setBorder(BorderFactory.createLineBorder(Color.black, 1));
-    	
-    	addMouseListener(this);
-    	addMouseMotionListener(this);
     	
 	}
 	
@@ -39,16 +31,9 @@ public class CanvasPanel extends JPanel implements MouseListener, MouseMotionLis
 		 super.paintComponent(g);
 		 
 		 g.setColor(new Color(242, 213, 145));
-		 
-		 // FIXME: Exception when uncommented
 
-		for (int i = 0; i < dataSource.classObjectsLists.size(); i++) {
-			System.out.println("Checking " + dataSource.classObjectsLists.get(i).getClassName());
-			dataSource.classObjectsLists.get(i).draw(g);
-		}
-		if (dataSource.selectedObject != -1) {
-			dataSource.classObjectsLists.get(dataSource.selectedObject).selectedState(g);
-		}
+		 DataSource dataSource = DataSource.getInstance();
+
 		Relationship[][] rels = dataSource.relationships;
 		for (int i=0 ; i< rels.length; i++) {
 			for (int j=0 ; j<rels[0].length ; j++) {
@@ -58,7 +43,7 @@ public class CanvasPanel extends JPanel implements MouseListener, MouseMotionLis
 							dataSource.classObjectsLists.get(i).getY(),
 							dataSource.classObjectsLists.get(j).getX(),
 							dataSource.classObjectsLists.get(j).getY());
-					switch (rels[i][j]) { // change it to arrows
+					switch (rels[i][j]) { // change it to arrows, use chain of responsibilities for drawing the line
 						case AGGREGATION -> System.out.println("Aggregation between " + i + " and " + j);
 						case ASSOCIATION -> System.out.println("Association between " + i + " and " + j);
 						case INHERITANCE -> System.out.println("Inheritance between " + i + " and " + j);
@@ -66,81 +51,14 @@ public class CanvasPanel extends JPanel implements MouseListener, MouseMotionLis
 				}
 			}
 		}
-		for (int ix=0 ; ix< rels.length ; ix++) {
-			for (int j=0 ; j<rels[0].length ; j++) {
-				if (rels[ix][j] != null)
-					System.out.println(rels[ix][j].name());
-			}
+		for (int i = 0; i < dataSource.classObjectsLists.size(); i++) {
+			dataSource.classObjectsLists.get(i).draw(g);
+		}
+		if (dataSource.getSelectedObject() != -1) {
+			dataSource.classObjectsLists.get(dataSource.getSelectedObject()).selectedState(g);
 		}
 			 
 //		g.drawImage(canvas, 0, 0, this);
-	}
-	
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		System.out.println("Mouse clicked at ("
-				+ e.getX() + ", " + e.getY() + ")");
-		int click = dataSource.isOnClassObject(e.getX(), e.getY());
-		if (dataSource.selectedObject != -1 && click != -1) {
-			dataSource.addRelationship(currentRelationshipType, dataSource.selectedObject, click);
-			dataSource.selectedObject = -1;
-		} else if (click == -1) {
-			ClassObject o = new ClassObject(e.getX(), e.getY());
-			String name = (String)JOptionPane.showInputDialog(
-					e.getComponent(),
-					"Enter the new class name",
-					"Class Name",
-					JOptionPane.PLAIN_MESSAGE,
-					null,
-					null,
-					"Default");
-			if ((name != null) && (name.length() > 0))
-				o.setClassName(name);
-			dataSource.addClassObject(o);
-		} else {
-			dataSource.selectedObject = click;
-		}
-		
-		repaint();
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		repaint();
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		repaint();
-
-	}
-
-	@Override
-	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
