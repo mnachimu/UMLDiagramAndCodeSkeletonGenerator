@@ -4,22 +4,25 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
-public class CanvasPanel extends JPanel implements MouseListener, MouseMotionListener {
+public class CanvasPanel extends JPanel implements MouseListener, MouseMotionListener, Observer {
 	
-	List<ClassObject> objects;
+//	List<ClassObject> objects;
+	Relationship currentRelationshipType = Relationship.AGGREGATION;
+	DataSource dataSource;
 	private static final int width = 625;
 	private static final int height = 600;
 	
 	public BufferedImage canvas;
 	
 	int mouseX, mouseY;
-	
+
 	public CanvasPanel(int x, int y) {
-		
 		canvas = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-		objects = new ArrayList<ClassObject>();
-		
+//		objects = new ArrayList<ClassObject>();
+		dataSource = DataSource.getInstance();
 		this.setBackground(Color.white);
 		this.setBounds(x, y, width, height);
     	this.setLayout(new BorderLayout());
@@ -37,10 +40,36 @@ public class CanvasPanel extends JPanel implements MouseListener, MouseMotionLis
 		 g.setColor(new Color(242, 213, 145));
 		 
 		 // FIXME: Exception when uncommented
-		for (int i = 0; i < objects.size(); i++) {
-				 objects.get(i).draw(g);
-		}
 
+		for (int i = 0; i < dataSource.classObjectsLists.size(); i++) {
+			dataSource.classObjectsLists.get(i).draw(g);
+		}
+		if (dataSource.selectedObject != -1) {
+			dataSource.classObjectsLists.get(dataSource.selectedObject).selectedState(g);
+		}
+		Relationship[][] rels = dataSource.relationships;
+		for (int i=0 ; i< rels.length; i++) {
+			for (int j=0 ; j<rels[0].length ; j++) {
+				if (!( rels[i][j] == null || rels[i][j] == Relationship.NO_RELATION)) {
+					System.out.println(rels[i][j].name());
+					g.drawLine(dataSource.classObjectsLists.get(i).getX(),
+							dataSource.classObjectsLists.get(i).getY(),
+							dataSource.classObjectsLists.get(j).getX(),
+							dataSource.classObjectsLists.get(j).getY());
+					switch (rels[i][j]) { // change it to arrows
+						case AGGREGATION -> System.out.println("Aggregation between " + i + " and " + j);
+						case ASSOCIATION -> System.out.println("Association between " + i + " and " + j);
+						case INHERITANCE -> System.out.println("Inheritance between " + i + " and " + j);
+					}
+				}
+			}
+		}
+		for (int ix=0 ; ix< rels.length ; ix++) {
+			for (int j=0 ; j<rels[0].length ; j++) {
+				if (rels[ix][j] != null)
+					System.out.println(rels[ix][j].name());
+			}
+		}
 			 
 //		g.drawImage(canvas, 0, 0, this);
 	}
@@ -50,10 +79,17 @@ public class CanvasPanel extends JPanel implements MouseListener, MouseMotionLis
 		// TODO Auto-generated method stub
 		System.out.println("Mouse clicked at ("
 				+ e.getX() + ", " + e.getY() + ")");
-		ClassObject o = new ClassObject(e.getX(), e.getY());
-		objects.add(o);
+		int click = dataSource.isOnClassObject(e.getX(), e.getY());
+		if (dataSource.selectedObject != -1 && click != -1) {
+			dataSource.addRelationship(currentRelationshipType, dataSource.selectedObject, click);
+			dataSource.selectedObject = -1;
+		} else if (click == -1) {
+			dataSource.addClassObject(new ClassObject(e.getX(), e.getY()));
+		} else {
+			dataSource.selectedObject = click;
+		}
 		
-		repaint();
+//		repaint();
 	}
 
 	@Override
@@ -93,5 +129,9 @@ public class CanvasPanel extends JPanel implements MouseListener, MouseMotionLis
 		// TODO Auto-generated method stub
 		
 	}
-	
+
+	@Override
+	public void update(Observable o, Object arg) {
+		repaint();
+	}
 }

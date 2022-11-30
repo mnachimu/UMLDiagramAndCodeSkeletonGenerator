@@ -4,11 +4,29 @@ import java.util.List;
 import java.util.Observable;
 
 public class DataSource extends Observable {
+    static DataSource instance;
     List<ClassObject> classObjectsLists = new ArrayList<>();
     HashMap<String, Integer> classObjectNameIndex = new HashMap<>();
 
+    int selectedObject = -1;
+
     Relationship[][] relationships = new Relationship[100][100];
-    public DataSource() {
+    private DataSource() {
+    }
+
+    public static DataSource getInstance() {
+        if (instance == null) {
+            instance = new DataSource();
+        }
+        return instance;
+    }
+
+    public int isOnClassObject(int x, int y) {
+        for (int i=0 ; i<classObjectsLists.size() ; i++) {
+            if (classObjectsLists.get(i).checkIfWithinBounds(x, y))
+                return i;
+        }
+        return -1;
     }
 
     public void addClassObject(ClassObject o) {
@@ -19,7 +37,11 @@ public class DataSource extends Observable {
     }
 
     public void addRelationship(Relationship type, String a, String b) {
-        relationships[classObjectNameIndex.get(a)][classObjectNameIndex.get(b)] = type;
+        addRelationship(type, classObjectNameIndex.get(a), classObjectNameIndex.get(b));
+    }
+
+    public void addRelationship(Relationship type, int a, int b) {
+        relationships[a][b] = type;
         setChanged();
         notifyObservers();
     }
