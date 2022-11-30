@@ -7,11 +7,8 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-public class CanvasPanel extends JPanel implements MouseListener, MouseMotionListener, Observer {
-	
-//	List<ClassObject> objects;
-	Relationship currentRelationshipType = Relationship.AGGREGATION;
-	DataSource dataSource;
+public class CanvasPanel extends JPanel implements Observer {
+	// view
 	private static final int width = 625;
 	private static final int height = 600;
 	
@@ -21,16 +18,11 @@ public class CanvasPanel extends JPanel implements MouseListener, MouseMotionLis
 
 	public CanvasPanel(int x, int y) {
 		canvas = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-//		objects = new ArrayList<ClassObject>();
-		dataSource = DataSource.getInstance();
 
 		this.setBackground(Color.white);
 		this.setBounds(x, y, width, height);
     	this.setLayout(new BorderLayout());
     	this.setBorder(BorderFactory.createLineBorder(Color.black, 1));
-    	
-    	addMouseListener(this);
-    	addMouseMotionListener(this);
     	
 	}
 	
@@ -39,8 +31,8 @@ public class CanvasPanel extends JPanel implements MouseListener, MouseMotionLis
 		 super.paintComponent(g);
 		 
 		 g.setColor(new Color(242, 213, 145));
-		 
-		 // FIXME: Exception when uncommented
+
+		 DataSource dataSource = DataSource.getInstance();
 
 		for (int i = 0; i < dataSource.classObjectsLists.size(); i++) {
 			dataSource.classObjectsLists.get(i).draw(g);
@@ -73,73 +65,6 @@ public class CanvasPanel extends JPanel implements MouseListener, MouseMotionLis
 		}
 			 
 //		g.drawImage(canvas, 0, 0, this);
-	}
-	
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		System.out.println("Mouse clicked at ("
-				+ e.getX() + ", " + e.getY() + ")");
-		int click = dataSource.isOnClassObject(e.getX(), e.getY());
-		if (dataSource.selectedObject != -1 && click != -1) {
-			dataSource.addRelationship(currentRelationshipType, dataSource.selectedObject, click);
-			dataSource.selectedObject = -1;
-		} else if (click == -1) {
-			ClassObject o = new ClassObject(e.getX(), e.getY());
-			dataSource.addClassObject(o);
-			String name = (String)JOptionPane.showInputDialog(
-					e.getComponent(),
-					"Enter the new class name",
-					"Class Name",
-					JOptionPane.PLAIN_MESSAGE,
-					null,
-					null,
-					"Default");
-			if ((name != null) && (name.length() > 0))
-				o.setClassName(name);
-		} else {
-			dataSource.selectedObject = click;
-		}
-		
-//		repaint();
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		repaint();
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		repaint();
-
-	}
-
-	@Override
-	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
