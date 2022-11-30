@@ -6,18 +6,16 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class CanvasPanel extends JPanel implements MouseListener, MouseMotionListener {
-	
-	List<ClassObject> objects;
+
+	public List<ClassObject> objects;	// Maybe we can put this in the DataSource model?
+
 	private static final int width = 625;
 	private static final int height = 600;
-	
-	public BufferedImage canvas;
-	
-	int mouseX, mouseY;
+		
+	private int mouseX, mouseY;
 	
 	public CanvasPanel(int x, int y) {
 		
-		canvas = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 		objects = new ArrayList<ClassObject>();
 		
 		this.setBackground(Color.white);
@@ -36,13 +34,10 @@ public class CanvasPanel extends JPanel implements MouseListener, MouseMotionLis
 		 
 		 g.setColor(new Color(242, 213, 145));
 		 
-		 // FIXME: Exception when uncommented
 		for (int i = 0; i < objects.size(); i++) {
-				 objects.get(i).draw(g);
+			objects.get(i).draw(g);
 		}
 
-			 
-//		g.drawImage(canvas, 0, 0, this);
 	}
 	
 	@Override
@@ -51,7 +46,19 @@ public class CanvasPanel extends JPanel implements MouseListener, MouseMotionLis
 		System.out.println("Mouse clicked at ("
 				+ e.getX() + ", " + e.getY() + ")");
 		ClassObject o = new ClassObject(e.getX(), e.getY());
+		String name = (String)JOptionPane.showInputDialog(
+				e.getComponent(),
+				"Enter the new class name",
+				"Class Name",
+				JOptionPane.PLAIN_MESSAGE,
+				null,
+				null,
+				"Default");
 		objects.add(o);
+
+		if ((name != null) && (name.length() > 0)) {
+			o.setName(name);
+		}
 		
 		repaint();
 	}
