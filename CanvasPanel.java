@@ -43,6 +43,7 @@ public class CanvasPanel extends JPanel implements MouseListener, MouseMotionLis
 		 // FIXME: Exception when uncommented
 
 		for (int i = 0; i < dataSource.classObjectsLists.size(); i++) {
+			System.out.println("Checking " + dataSource.classObjectsLists.get(i).getClassName());
 			dataSource.classObjectsLists.get(i).draw(g);
 		}
 		if (dataSource.selectedObject != -1) {
@@ -86,7 +87,6 @@ public class CanvasPanel extends JPanel implements MouseListener, MouseMotionLis
 			dataSource.selectedObject = -1;
 		} else if (click == -1) {
 			ClassObject o = new ClassObject(e.getX(), e.getY());
-			dataSource.addClassObject(o);
 			String name = (String)JOptionPane.showInputDialog(
 					e.getComponent(),
 					"Enter the new class name",
@@ -97,11 +97,12 @@ public class CanvasPanel extends JPanel implements MouseListener, MouseMotionLis
 					"Default");
 			if ((name != null) && (name.length() > 0))
 				o.setClassName(name);
+			dataSource.addClassObject(o);
 		} else {
 			dataSource.selectedObject = click;
 		}
 		
-//		repaint();
+		repaint();
 	}
 
 	@Override
