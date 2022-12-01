@@ -29,6 +29,14 @@ public class DataSource extends Observable {
         return -1;
     }
 
+    public ClassObject getClassObjectForPoint(int x, int y) {
+        for (int i=0 ; i<classObjectsLists.size() ; i++) {
+            if (classObjectsLists.get(i).checkIfWithinBounds(x, y))
+                return classObjectsLists.get(i);
+        }
+        return null;
+    }
+
     public void addClassObject(ClassObject o) {
         classObjectNameIndex.put(o.getClassName(), classObjectsLists.size());
         classObjectsLists.add(o);

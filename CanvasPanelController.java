@@ -65,7 +65,9 @@ public class CanvasPanelController implements MouseListener, MouseMotionListener
     @Override
     public void mouseDragged(MouseEvent e) {
         // TODO Auto-generated method stub
-
+        ClassObject o = dataSource.getClassObjectForPoint(e.getX(), e.getY());
+        o.resetCoordinates(e.getX(), e.getY());
+        canvasPanel.repaint();
     }
 
     @Override
