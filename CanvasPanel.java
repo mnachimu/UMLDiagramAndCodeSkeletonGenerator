@@ -13,9 +13,7 @@ public class CanvasPanel extends JPanel implements Observer {
 	private static final int height = 600;
 
 	public BufferedImage canvas;
-
-	int mouseX, mouseY;
-
+	
 	public CanvasPanel(int x, int y) {
 		canvas = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
@@ -32,7 +30,7 @@ public class CanvasPanel extends JPanel implements Observer {
 
 		 g.setColor(new Color(242, 213, 145));
 
-		 DataSource dataSource = DataSource.getInstance();
+		DataSource dataSource = DataSource.getInstance();
 
 		Relationship[][] rels = dataSource.relationships;
 		for (int i=0 ; i< rels.length; i++) {
@@ -63,6 +61,7 @@ public class CanvasPanel extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
+		System.out.println("CanvasPanel update() called!");
 		repaint();
 	}
 }

@@ -27,6 +27,7 @@ public class GUI extends JFrame implements ActionListener {
 		this.menuBar = jmenuBar;
 		this.statusBar = jStatusBar;
 		// display = new DisplayPanel(20, 30);
+
 		this.setJMenuBar(menuBar.getJMenuBar());
 		this.add(canvas);
 		this.add(display);
