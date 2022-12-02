@@ -26,6 +26,14 @@ public class CanvasPanelController implements MouseListener, MouseMotionListener
                 + e.getX() + ", " + e.getY() + ")");
         int click = dataSource.isOnClassObject(e.getX(), e.getY());
         if (dataSource.selectedObject != -1 && click != -1) {
+            currentRelationshipType = (Relationship) JOptionPane.showInputDialog(
+                    e.getComponent(),
+                    "The type of relation between the classes",
+                    "Relationship Type",
+                    JOptionPane.OK_OPTION,
+                    null,
+                    Relationship.values(),
+                    currentRelationshipType);
             dataSource.addRelationship(currentRelationshipType, dataSource.selectedObject, click);
             dataSource.selectedObject = -1;
             dataSource.setSelectedObject(-1);

@@ -33,8 +33,9 @@ public class CanvasPanel extends JPanel implements Observer {
 		DataSource dataSource = DataSource.getInstance();
 
 		Relationship[][] rels = dataSource.relationships;
-		for (int i=0 ; i< rels.length; i++) {
-			for (int j=0 ; j<rels[0].length ; j++) {
+		int maxLen = dataSource.classObjectsLists.size();
+		for (int i=0 ; i< maxLen; i++) {
+			for (int j=0 ; j<maxLen; j++) {
 				if (!( rels[i][j] == null || rels[i][j] == Relationship.NO_RELATION)) {
 					System.out.println(rels[i][j].name());
 					g.drawLine(dataSource.classObjectsLists.get(i).getX(),
@@ -49,7 +50,7 @@ public class CanvasPanel extends JPanel implements Observer {
 				}
 			}
 		}
-		for (int i = 0; i < dataSource.classObjectsLists.size(); i++) {
+		for (int i = 0; i < maxLen; i++) {
 			dataSource.classObjectsLists.get(i).draw(g);
 		}
 		if (dataSource.getSelectedObject() != -1) {
