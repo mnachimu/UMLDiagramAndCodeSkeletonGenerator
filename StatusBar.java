@@ -16,9 +16,9 @@ public class StatusBar {
 
     }
     StatusBar(int i1, int i2, int i3, int i4){
-        jPanel = new JPanel();
+        jPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         jPanel.setBounds(i1, i2, i3, i4);
-        statusBarTxt = new JLabel("Status Bar");
+        statusBarTxt = new JLabel("Status Bar", SwingConstants.LEFT);
         jPanel.setBackground(Color.WHITE);
         statusTxt = new JLabel(status);
         jPanel.add(statusBarTxt);
