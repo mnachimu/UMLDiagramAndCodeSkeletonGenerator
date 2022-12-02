@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< Updated upstream
       <module fileurl="file://$PROJECT_DIR$/UMLDiagramAndCodeSkeletonGenerator.iml" filepath="$PROJECT_DIR$/UMLDiagramAndCodeSkeletonGenerator.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/UMLDiagramAndSkeletonGenerator.iml" filepath="$PROJECT_DIR$/.idea/UMLDiagramAndSkeletonGenerator.iml" />
+>>>>>>> Stashed changes
     </modules>
   </component>
 </project>
