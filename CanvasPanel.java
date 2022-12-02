@@ -44,9 +44,9 @@ public class CanvasPanel extends JPanel implements Observer {
 							dataSource.classObjectsLists.get(j).getX(),
 							dataSource.classObjectsLists.get(j).getY());
 					switch (rels[i][j]) { // change it to arrows, use chain of responsibilities for drawing the line
-						// case AGGREGATION -> System.out.println("Aggregation between " + i + " and " + j);
-						// case ASSOCIATION -> System.out.println("Association between " + i + " and " + j);
-						// case INHERITANCE -> System.out.println("Inheritance between " + i + " and " + j);
+						case AGGREGATION -> System.out.println("Aggregation between " + i + " and " + j);
+						case ASSOCIATION -> System.out.println("Association between " + i + " and " + j);
+						case INHERITANCE -> System.out.println("Inheritance between " + i + " and " + j);
 					}
 				}
 			}
