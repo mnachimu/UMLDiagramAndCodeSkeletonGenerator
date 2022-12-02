@@ -24,9 +24,8 @@ public class DisplayPanel extends JScrollPane implements Observer {
         outputArea.setLineWrap(true);
         outputArea.setWrapStyleWord(true);
         outputArea.setFont(new Font("Courier", Font.PLAIN, 14));
-        outputArea.setText("Initialized");
 
-        this.add(outputArea);
+        this.setViewportView(outputArea);
         this.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		this.setBounds(x, y, width,height);
 		this.setForeground(Color.black);
@@ -39,19 +38,20 @@ public class DisplayPanel extends JScrollPane implements Observer {
     }
 
     public void setCode() {
-        // For testing
-        code += "test() " + "{\n"
-                + "\t" + "testStuff();\n"
-                + "}\n";
-        // code = output;
+        code = "";
+
+        // For testing        
+        // code += "test() " + "{\n"
+        //         + "\t" + "testStuff();\n"
+        //         + "}\n";
 
         // Expected behavior
-        // if (dataSource.classObjectsLists.size() > 0) {
-        //     for (int i = 0; i < dataSource.classObjectsLists.size(); i++) {
-        //         code = dataSource.classObjectsLists.get(i).getClassName() + "{\n"
-        //                 + "}\n";
-        //     }
-        // }
+        if (dataSource.classObjectsLists.size() > 0) {
+            for (int i = 0; i < dataSource.classObjectsLists.size(); i++) {
+                code += dataSource.classObjectsLists.get(i).getClassName() + "{\n"
+                        + "}\n\n";
+            }
+        }
     }
 
     public String getCode() {
@@ -65,12 +65,11 @@ public class DisplayPanel extends JScrollPane implements Observer {
     @Override
     public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-        code += "test() " + "{\n"
-                + "\t" + "testStuff();\n"
-                + "}\n";
+        // code += "test() " + "{\n"
+        //         + "\t" + "testStuff();\n"
+        //         + "}\n";
 	}
 
-    // FIXME: Text is not being outputted on the DisplayPanel
     @Override
 	public void update(Observable o, Object arg) {
         System.out.println("DisplayPanel update() called!");
