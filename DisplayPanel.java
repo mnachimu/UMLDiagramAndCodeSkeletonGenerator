@@ -32,25 +32,25 @@ public class DisplayPanel extends JScrollPane implements Observer {
 		this.setForeground(Color.black);
     	this.setBackground(Color.white);
     	this.setBorder(BorderFactory.createLineBorder(Color.black, 1));
-
-        code = "This is a test";
     }
 
     public JTextArea getOutputArea() {
         return outputArea;
     }
 
-    public void setCode(String output) {
+    public void setCode() {
         // For testing
-        code = "test() " + "{\n"
+        code += "test() " + "{\n"
                 + "\t" + "testStuff();\n"
                 + "}\n";
         // code = output;
 
         // Expected behavior
-        // for (int i = 0; i < dataSource.classObjectsLists.size(); i++) {
-        //     code = dataSource.classObjectsLists.get(i).getClassName() + "{\n"
-        //             + "}\n";
+        // if (dataSource.classObjectsLists.size() > 0) {
+        //     for (int i = 0; i < dataSource.classObjectsLists.size(); i++) {
+        //         code = dataSource.classObjectsLists.get(i).getClassName() + "{\n"
+        //                 + "}\n";
+        //     }
         // }
     }
 
@@ -63,7 +63,20 @@ public class DisplayPanel extends JScrollPane implements Observer {
     // }
 
     @Override
+    public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+        code += "test() " + "{\n"
+                + "\t" + "testStuff();\n"
+                + "}\n";
+	}
+
+    // FIXME: Text is not being outputted on the DisplayPanel
+    @Override
 	public void update(Observable o, Object arg) {
+        System.out.println("DisplayPanel update() called!");
+
+        setCode();
         outputArea.setText(getCode());
+        repaint();
 	}
 }

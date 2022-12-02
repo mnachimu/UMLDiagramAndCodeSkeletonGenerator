@@ -10,6 +10,7 @@ public class UMLDiagramAndSkeletonGenerator {
 
         CanvasPanelController controller = new CanvasPanelController(canvas);
         DataSource.getInstance().addObserver(canvas);
+        DataSource.getInstance().addObserver(display);
     }
 
 }

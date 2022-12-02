@@ -63,6 +63,7 @@ public class CanvasPanel extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
+		System.out.println("CanvasPanel update() called!");
 		repaint();
 	}
 }
