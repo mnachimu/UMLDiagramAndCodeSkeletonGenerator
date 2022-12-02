@@ -14,7 +14,7 @@ public class CanvasPanel extends JPanel implements Observer {
 	
 	public BufferedImage canvas;
 	
-	int mouseX, mouseY;
+	// int mouseX, mouseY;	// Unused variables; can remove if not needed
 
 	public CanvasPanel(int x, int y) {
 		canvas = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
@@ -28,11 +28,11 @@ public class CanvasPanel extends JPanel implements Observer {
 	
 	@Override
 	public void paintComponent(Graphics g) {
-		 super.paintComponent(g);
+		super.paintComponent(g);
 		 
-		 g.setColor(new Color(242, 213, 145));
+		g.setColor(new Color(242, 213, 145));
 
-		 DataSource dataSource = DataSource.getInstance();
+		DataSource dataSource = DataSource.getInstance();
 
 		Relationship[][] rels = dataSource.relationships;
 		for (int i=0 ; i< rels.length; i++) {
