@@ -18,7 +18,7 @@ public class DisplayPanel extends JScrollPane implements Observer {
         outputArea.setEnabled(false);
         outputArea.setLineWrap(true);
         outputArea.setWrapStyleWord(true);
-        outputArea.setFont(new Font("Ariel", Font.PLAIN, 14));
+        outputArea.setFont(new Font("Courier", Font.PLAIN, 14));
 
         this.add(outputArea);
         this.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -26,6 +26,10 @@ public class DisplayPanel extends JScrollPane implements Observer {
 		this.setForeground(Color.black);
     	this.setBackground(Color.white);
     	this.setBorder(BorderFactory.createLineBorder(Color.black, 1));
+    }
+
+    public void print() {
+        
     }
 
     @Override
