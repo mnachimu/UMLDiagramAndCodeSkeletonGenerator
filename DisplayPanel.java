@@ -6,7 +6,7 @@ import java.util.Observer;
 
 
 public class DisplayPanel extends JScrollPane implements Observer {
-    
+
     public JTextArea outputArea;
 
 	private static final int width = 350;
@@ -29,11 +29,10 @@ public class DisplayPanel extends JScrollPane implements Observer {
     }
 
     public void print() {
-        
+
     }
 
     @Override
 	public void update(Observable o, Object arg) {
-
 	}
 }

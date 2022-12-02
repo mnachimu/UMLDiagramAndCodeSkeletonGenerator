@@ -1,18 +1,24 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * @author Darshan Navadiya
  */
-public class StatusBar {
+public class StatusBar{
     JLabel statusBarTxt, statusTxt;
+
+
+    String status;
+    JPanel jPanel;
+
     public void setStatus(String status) {
         this.status = status;
-    }
 
-    String status="hello";
-    JPanel jPanel;
+    }
     StatusBar(){
+        jPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
     }
     StatusBar(int i1, int i2, int i3, int i4){
@@ -20,9 +26,10 @@ public class StatusBar {
         jPanel.setBounds(i1, i2, i3, i4);
         statusBarTxt = new JLabel("Status Bar", SwingConstants.LEFT);
         jPanel.setBackground(Color.WHITE);
-        statusTxt = new JLabel(status);
         jPanel.add(statusBarTxt);
+        statusTxt = new JLabel(status);
         jPanel.add(statusTxt);
+
     }
     public JPanel getjPanel(){
         return this.jPanel;
