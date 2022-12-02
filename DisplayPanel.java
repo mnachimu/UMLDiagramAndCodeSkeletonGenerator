@@ -6,6 +6,7 @@ import java.util.Observer;
 
 
 public class DisplayPanel extends JScrollPane implements Observer {
+
     
     private JTextArea outputArea;
 
@@ -33,6 +34,7 @@ public class DisplayPanel extends JScrollPane implements Observer {
     	this.setBorder(BorderFactory.createLineBorder(Color.black, 1));
     }
 
+
     public JTextArea getOutputArea() {
         return outputArea;
     }
@@ -56,6 +58,7 @@ public class DisplayPanel extends JScrollPane implements Observer {
 
     public String getCode() {
         return code;
+
     }
 
     // public void print() {

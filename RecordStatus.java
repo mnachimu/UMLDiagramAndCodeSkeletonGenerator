@@ -26,6 +26,7 @@ public class RecordStatus implements IStatus{
 
     @Override
     public void Record(String msg) {
+        System.out.println("-------------- Class "+msg+" created -------------");
         StatusBar statusBar = new StatusBar();
         statusBar.setStatus(msg);
     }
