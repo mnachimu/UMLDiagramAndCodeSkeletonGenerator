@@ -11,11 +11,9 @@ public class CanvasPanel extends JPanel implements Observer {
 	// view
 	private static final int width = 625;
 	private static final int height = 600;
-	
+
 	public BufferedImage canvas;
 	
-	int mouseX, mouseY;
-
 	public CanvasPanel(int x, int y) {
 		canvas = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
@@ -23,16 +21,16 @@ public class CanvasPanel extends JPanel implements Observer {
 		this.setBounds(x, y, width, height);
     	this.setLayout(new BorderLayout());
     	this.setBorder(BorderFactory.createLineBorder(Color.black, 1));
-    	
+
 	}
-	
+
 	@Override
 	public void paintComponent(Graphics g) {
 		 super.paintComponent(g);
-		 
+
 		 g.setColor(new Color(242, 213, 145));
 
-		 DataSource dataSource = DataSource.getInstance();
+		DataSource dataSource = DataSource.getInstance();
 
 		Relationship[][] rels = dataSource.relationships;
 		for (int i=0 ; i< rels.length; i++) {
@@ -57,12 +55,13 @@ public class CanvasPanel extends JPanel implements Observer {
 		if (dataSource.getSelectedObject() != -1) {
 			dataSource.classObjectsLists.get(dataSource.getSelectedObject()).selectedState(g);
 		}
-			 
+
 //		g.drawImage(canvas, 0, 0, this);
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
+		System.out.println("CanvasPanel update() called!");
 		repaint();
 	}
 }

@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.*;
 
 
 public class CanvasPanelController implements MouseListener, MouseMotionListener {
@@ -41,6 +42,8 @@ public class CanvasPanelController implements MouseListener, MouseMotionListener
             if ((name != null) && (name.length() > 0))
                 o.setClassName(name);
             dataSource.addClassObject(o);
+            RecordStatus.getInstance().Record("Class "+name +" created.");
+
         } else {
             dataSource.setSelectedObject(click);
         }
