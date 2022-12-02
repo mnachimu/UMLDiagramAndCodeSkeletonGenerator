@@ -19,7 +19,7 @@ public class StatusBar {
         jPanel = new JPanel();
         jPanel.setBounds(i1, i2, i3, i4);
         statusBarTxt = new JLabel("Status Bar");
-        jPanel.setBackground(Color.CYAN);
+        jPanel.setBackground(Color.WHITE);
         statusTxt = new JLabel(status);
         jPanel.add(statusBarTxt);
         jPanel.add(statusTxt);
