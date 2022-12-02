@@ -29,6 +29,13 @@ public class CanvasPanelController implements MouseListener, MouseMotionListener
             dataSource.addRelationship(currentRelationshipType, dataSource.selectedObject, click);
             dataSource.selectedObject = -1;
             dataSource.setSelectedObject(-1);
+            // todo: remove this - set the currentRelationshipType to a different relationship
+            if (currentRelationshipType.equals(Relationship.AGGREGATION))
+                currentRelationshipType = Relationship.ASSOCIATION;
+            else if (currentRelationshipType.equals(Relationship.ASSOCIATION))
+                currentRelationshipType = Relationship.INHERITANCE;
+            else
+                currentRelationshipType = Relationship.AGGREGATION;
         } else if (click == -1) {
             ClassObject o = new ClassObject(e.getX(), e.getY());
             String name = (String) JOptionPane.showInputDialog(
@@ -69,8 +76,10 @@ public class CanvasPanelController implements MouseListener, MouseMotionListener
     public void mouseDragged(MouseEvent e) {
         // TODO Auto-generated method stub
         ClassObject o = dataSource.getClassObjectForPoint(e.getX(), e.getY());
-        o.resetCoordinates(e.getX(), e.getY());
-        canvasPanel.repaint();
+        if (o != null) {
+            o.resetCoordinates(e.getX(), e.getY());
+            canvasPanel.repaint();
+        }
     }
 
     @Override

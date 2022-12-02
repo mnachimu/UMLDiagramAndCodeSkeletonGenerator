@@ -47,6 +47,8 @@ public class ClassObject {
     public void displayName(Graphics g) {
         g.setColor(Color.BLACK);
         g.setFont(new Font("Courier", Font.BOLD, 14));
+        if (className == null || className.equals(""))
+            className = "Default";
         g.drawString(className, bounds.x + 30, bounds.y + 20);
 
     }
