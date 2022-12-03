@@ -1,15 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-/**
- * This class is for the left side panel which is Display panel which generates the code of class diagram.
- * This is a part of VIEW in MVC.
- * This class implements the Observer pattern.
- * @version 1.0
- */
+
 public class DisplayPanel extends JScrollPane implements Observer {
 
     
@@ -20,12 +17,8 @@ public class DisplayPanel extends JScrollPane implements Observer {
 
     private String code;
     DataSource dataSource;
+    List<String> codeList;
 
-    /**
-     * Class Constructor
-     * @param x
-     * @param y
-     */
     public DisplayPanel(int x, int y) {
         this.dataSource = DataSource.getInstance();
 
@@ -49,51 +42,82 @@ public class DisplayPanel extends JScrollPane implements Observer {
         return outputArea;
     }
 
-    /**
-     * Generate the code of newly created class and relationship
-     */
     public void setCode() {
-        code = "";
+        String input;
+        String oldSnip;
+        String newSnip;
 
-        // For testing        
-        // code += "test() " + "{\n"
-        //         + "\t" + "testStuff();\n"
-        //         + "}\n";
+        Relationship[][] rels =  dataSource.relationships;
+        int maxLen = dataSource.classObjectsLists.size();
+        codeList = new ArrayList<String>();
 
-        // Expected behavior
-        if (dataSource.classObjectsLists.size() > 0) {
-            for (int i = 0; i < dataSource.classObjectsLists.size(); i++) {
-                code += dataSource.classObjectsLists.get(i).getClassName() + "{\n"
-                        + "}\n\n";
+        System.out.println("Classes created: " + maxLen);
+
+        if (maxLen > 0) {
+            for (int i = 0; i < maxLen; i++ ) {     // Object branch
+                System.out.println("Object " + i);
+                input = "";
+                input += dataSource.classObjectsLists.get(i).getClassName();
+                for (int j = 0; j < maxLen; j++) {  // Relationship branch
+                    if (!((rels[i][j] == null) || (rels[i][j] == Relationship.NO_RELATION))) {
+                        System.out.print("Relation between " + i + " and " + j + ": ");
+                        switch (rels[i][j]) {
+                            case NO_RELATION:
+                                break;
+                            case AGGREGATION:
+                                input += "\t" + dataSource.classObjectsLists.get(j).getClassName() + "\n";
+                                break;
+                            case ASSOCIATION:
+                                if (input.contains("\tmethod() {")) {
+                                    oldSnip = "\t}\n";
+                                    newSnip = "\t\t" + dataSource.classObjectsLists.get(j).getClassName() + "\n"
+                                                + "\t}\n";
+                                    input = input.replace(oldSnip, newSnip);
+                                }
+                                else {
+                                    input += "\tmethod() {\n";
+                                    input += "\t\t" + dataSource.classObjectsLists.get(j).getClassName()+ "\n";
+                                    input += "\t}\n";
+                                }
+
+                                break;
+                            case INHERITANCE:
+                                oldSnip = dataSource.classObjectsLists.get(i).getClassName() + " {\n";
+                                newSnip = dataSource.classObjectsLists.get(i).getClassName()
+                                    + " extends " + dataSource.classObjectsLists.get(j).getClassName() + " {\n";
+                                input = input.replace(oldSnip, newSnip);
+                                break;
+                        }
+                    }
+                    else {
+                        if (j < 1) {
+                            input += " {\n";
+                        }
+                    }
+                }
+                input += "}\n\n";
+                codeList.add(i, input);
             }
         }
     }
 
-    /**
-     * Return the code
-     * @return
-     */
-    public String getCode() {
-        return code;
-
+    public void formatCode() {
+        code = "";
+        for (int i = 0; i < codeList.size(); i++) {
+            code += codeList.get(i);
+        }
     }
 
-    @Override
-    public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-	}
+    public String getCode() {
+        return code;
+    }
 
-    /**
-     * Observer pattern update() method
-     * @param o
-     * @param arg
-     */
     @Override
 	public void update(Observable o, Object arg) {
         System.out.println("DisplayPanel update() called!");
 
         setCode();
+        formatCode();
         outputArea.setText(getCode());
-        repaint();
 	}
 }
