@@ -4,13 +4,14 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * @author Darshan Navadiya
+ * Status bar class and operations related to it.
+ * @version 1.0
  */
 public class StatusBar extends JScrollPane{
     public static JTextArea statusArea;
     private static final int width = 1005;
 	private static final int height =  30;
-
+  
     String status;
 
     public void setStatus(String status) {
@@ -20,12 +21,16 @@ public class StatusBar extends JScrollPane{
         temp.setText(status);
         
     }
+    
     public StatusBar(){
     }
 
     public String getStatus(){ return status;}
 
-    
+    /**
+     * Class Constructor
+     * Creates the panel of specific dimensions
+     */
     public StatusBar(int x, int y){
 
         statusArea = new JTextArea();

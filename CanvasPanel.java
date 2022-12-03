@@ -7,13 +7,23 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * Class for the Canvas panel where classes are added and relationships are established.
+ * This class is part of the VIEW.
+ * @version 1.0
+ */
 public class CanvasPanel extends JPanel implements Observer {
 	// view
 	private static final int width = 625;
 	private static final int height = 600;
 
 	public BufferedImage canvas;
-	
+
+	/**
+	 * Class Constructor which creats a BufferedImage object
+	 * @param x X coordinate from where the canvas panel should start
+	 * @param y Y coordinate from where the canvas panel should start.
+	 */
 	public CanvasPanel(int x, int y) {
 		canvas = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
@@ -24,6 +34,10 @@ public class CanvasPanel extends JPanel implements Observer {
 
 	}
 
+	/**
+	 * Draws a relation between two classes
+	 * @param g
+	 */
 	@Override
 	public void paintComponent(Graphics g) {
 		 super.paintComponent(g);
@@ -60,6 +74,11 @@ public class CanvasPanel extends JPanel implements Observer {
 //		g.drawImage(canvas, 0, 0, this);
 	}
 
+	/**
+	 * This method is a part of Observer pattern.
+	 * @param o
+	 * @param arg
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		System.out.println("CanvasPanel update() called!");

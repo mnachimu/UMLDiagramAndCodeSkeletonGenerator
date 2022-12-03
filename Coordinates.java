@@ -1,3 +1,8 @@
+/**
+ * Coordinate class to store data of all the classes' rectangles.
+ * This class is a part of MODEL in MVC.
+ * @version 1.0
+ */
 public class Coordinates {
     int x;
     int y;
