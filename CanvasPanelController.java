@@ -37,13 +37,6 @@ public class CanvasPanelController implements MouseListener, MouseMotionListener
             dataSource.addRelationship(currentRelationshipType, dataSource.selectedObject, click);
             dataSource.selectedObject = -1;
             dataSource.setSelectedObject(-1);
-            // todo: remove this - set the currentRelationshipType to a different relationship
-            if (currentRelationshipType.equals(Relationship.AGGREGATION))
-                currentRelationshipType = Relationship.ASSOCIATION;
-            else if (currentRelationshipType.equals(Relationship.ASSOCIATION))
-                currentRelationshipType = Relationship.INHERITANCE;
-            else
-                currentRelationshipType = Relationship.AGGREGATION;
         } else if (click == -1) {
             ClassObject o = new ClassObject(e.getX(), e.getY());
             String name = (String) JOptionPane.showInputDialog(
@@ -57,7 +50,7 @@ public class CanvasPanelController implements MouseListener, MouseMotionListener
             if ((name != null) && (name.length() > 0))
                 o.setClassName(name);
             dataSource.addClassObject(o);
-            RecordStatus.getInstance().Record("Class "+name +" created.");
+            RecordStatus.getInstance().Record("Class " + name +" created.");
 
         } else {
             dataSource.setSelectedObject(click);

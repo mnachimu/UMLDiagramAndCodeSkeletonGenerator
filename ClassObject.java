@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.geom.Line2D;
 
 public class ClassObject {
 
@@ -32,12 +33,12 @@ public class ClassObject {
 
     public int getX() {
         System.out.println("The coordinates.x and bounds.x " + coordinates.getX() + " " + bounds.x);
-        return coordinates.getX();
+        return (int)coordinates.getX();
     }
 
     public int getY() {
         System.out.println("The coordinates.x and bounds.x " + coordinates.getY() + " " + bounds.y);
-        return coordinates.getY();
+        return (int)coordinates.getY();
     }
 
     public boolean checkIfWithinBounds(int x, int y) {
@@ -68,6 +69,10 @@ public class ClassObject {
     public void unselectedState(Graphics g) {
         g.setColor(new Color(242, 213, 145));
         g.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
+    }
+
+    public Rectangle getBounds() {
+        return this.bounds;
     }
 
     private Point center() { // can be removed
