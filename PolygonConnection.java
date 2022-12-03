@@ -9,7 +9,6 @@ public class PolygonConnection extends BasicLineConnection {
     }
 
     public void handleConnectionForRelationship(Graphics g, Coordinates c1, Coordinates c2, int slant1, int slant2, Relationship relationshipType) {
-        System.out.println("IN polygon draw");
         if (relationshipType.equals(Relationship.COMPOSITION)) {
             //code for drawing polygon
             int x = (int) c1.getX();

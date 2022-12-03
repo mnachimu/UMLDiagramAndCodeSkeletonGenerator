@@ -51,7 +51,6 @@ public class ClassObject {
      * @return
      */
     public int getX() {
-        System.out.println("The coordinates.x and bounds.x " + coordinates.getX() + " " + bounds.x);
         return (int)coordinates.getX();
     }
 
@@ -60,7 +59,6 @@ public class ClassObject {
      * @return
      */
     public int getY() {
-        System.out.println("The coordinates.x and bounds.x " + coordinates.getY() + " " + bounds.y);
         return (int)coordinates.getY();
     }
 

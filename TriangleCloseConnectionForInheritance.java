@@ -10,7 +10,6 @@ public class TriangleCloseConnectionForInheritance extends BasicLineConnection {
     }
 
     public void handleConnectionForRelationship(Graphics g, Coordinates c1, Coordinates c2, int slant1, int slant2, Relationship relationshipType) {
-        System.out.println("IN triangle draw");
         if (relationshipType.equals(Relationship.INHERITANCE)) {
             // use c2 and slant2 to draw the triangle
             int x = (int) c2.getX();
