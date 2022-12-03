@@ -6,7 +6,12 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-
+/**
+ * Class to display the generated code.
+ * This class is part of VIEW in MVC.
+ * This class implements Observer interface. It observe the MODEL datasource and display the changes in code.
+ * @version 1.0
+ */
 public class DisplayPanel extends JScrollPane implements Observer {
 
     
@@ -19,6 +24,11 @@ public class DisplayPanel extends JScrollPane implements Observer {
     DataSource dataSource;
     List<String> codeList;
 
+    /**
+     * Class Constructor
+     * @param x
+     * @param y
+     */
     public DisplayPanel(int x, int y) {
         this.dataSource = DataSource.getInstance();
 
@@ -42,6 +52,9 @@ public class DisplayPanel extends JScrollPane implements Observer {
         return outputArea;
     }
 
+    /**
+     * updates the code everytime a new object : a class or a relationship is added.
+     */
     public void setCode() {
         String input;
         String oldSnip;
@@ -101,6 +114,9 @@ public class DisplayPanel extends JScrollPane implements Observer {
         }
     }
 
+    /**
+     * Append code of every class
+     */
     public void formatCode() {
         code = "";
         for (int i = 0; i < codeList.size(); i++) {
