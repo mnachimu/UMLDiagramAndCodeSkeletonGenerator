@@ -71,8 +71,9 @@ public class CanvasPanelController implements MouseListener, MouseMotionListener
                     "Default");
             if ((name != null) && (name.length() > 0))
                 o.setClassName(name);
-            dataSource.addClassObject(o);
             RecordStatus.getInstance().Record("Class "+name +" created.");
+            dataSource.addClassObject(o);
+            
 
         } else {
             dataSource.setSelectedObject(click);

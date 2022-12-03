@@ -32,8 +32,8 @@ public class DisplayPanel extends JScrollPane implements Observer {
         this.setViewportView(outputArea);
         this.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		this.setBounds(x, y, width,height);
-		this.setForeground(Color.black);
-    	this.setBackground(Color.white);
+		this.setForeground(Color.BLACK);
+    	this.setBackground(Color.WHITE);
     	this.setBorder(BorderFactory.createLineBorder(Color.black, 1));
     }
 

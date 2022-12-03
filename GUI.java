@@ -42,7 +42,7 @@ public class GUI extends JFrame implements ActionListener {
 		this.setJMenuBar(menuBar.getJMenuBar());
 		this.add(canvas);
 		this.add(display);
-		this.add(statusBar.getjPanel());
+		this.add(statusBar);
 //		this.pack();
 		// this.setVisible(true);
 	    this.setLayout(null);
