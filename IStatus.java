@@ -2,5 +2,5 @@
  * @version 1.0
  */
 public interface IStatus {
-    void Record(String msg);
+    void record(String msg);
 }

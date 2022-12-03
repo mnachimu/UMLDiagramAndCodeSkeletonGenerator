@@ -4,7 +4,7 @@
  * This class is a part of MODEL in MVC.
  * @version 1.0
  */
-public class RecordStatus implements IStatus{
+public class RecordStatus implements IStatus {
 
     private static volatile RecordStatus instance;
     private RecordStatus(){
@@ -36,7 +36,7 @@ public class RecordStatus implements IStatus{
      * @param msg
      */
     @Override
-    public void Record(String msg) {
+    public void record(String msg) {
         System.out.println("-------------- Class "+msg+" created -------------");
         StatusBar statusBar = new StatusBar();
         statusBar.setStatus(msg);
