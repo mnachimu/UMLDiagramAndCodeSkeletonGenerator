@@ -1,3 +1,5 @@
+import javax.xml.crypto.Data;
+
 public class UMLDiagramAndSkeletonGenerator {
 
     public static void main(String[] args) {
@@ -5,7 +7,7 @@ public class UMLDiagramAndSkeletonGenerator {
         System.out.println("Hello, World!");
         CanvasPanel canvas = new CanvasPanel(400, 30);
         DisplayPanel display = new DisplayPanel(20, 30);
-        StatusBar statusBar = new StatusBar(20, 650, 1005, 30);
+        StatusBar statusBar = new StatusBar(20, 650);
         GUI plotPanel = new GUI(canvas, display, menuBar, statusBar);
 
         CanvasPanelController controller = new CanvasPanelController(canvas);
