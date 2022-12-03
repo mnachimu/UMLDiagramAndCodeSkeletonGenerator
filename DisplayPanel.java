@@ -4,7 +4,12 @@ import java.awt.event.*;
 import java.util.Observable;
 import java.util.Observer;
 
-
+/**
+ * This class is for the left side panel which is Display panel which generates the code of class diagram.
+ * This is a part of VIEW in MVC.
+ * This class implements the Observer pattern.
+ * @version 1.0
+ */
 public class DisplayPanel extends JScrollPane implements Observer {
 
     
@@ -16,6 +21,11 @@ public class DisplayPanel extends JScrollPane implements Observer {
     private String code;
     DataSource dataSource;
 
+    /**
+     * Class Constructor
+     * @param x
+     * @param y
+     */
     public DisplayPanel(int x, int y) {
         this.dataSource = DataSource.getInstance();
 
@@ -39,6 +49,9 @@ public class DisplayPanel extends JScrollPane implements Observer {
         return outputArea;
     }
 
+    /**
+     * Generate the code of newly created class and relationship
+     */
     public void setCode() {
         code = "";
 
@@ -56,23 +69,25 @@ public class DisplayPanel extends JScrollPane implements Observer {
         }
     }
 
+    /**
+     * Return the code
+     * @return
+     */
     public String getCode() {
         return code;
 
     }
 
-    // public void print() {
-    //     outputArea.setText(getCode());
-    // }
-
     @Override
     public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-        // code += "test() " + "{\n"
-        //         + "\t" + "testStuff();\n"
-        //         + "}\n";
 	}
 
+    /**
+     * Observer pattern update() method
+     * @param o
+     * @param arg
+     */
     @Override
 	public void update(Observable o, Object arg) {
         System.out.println("DisplayPanel update() called!");

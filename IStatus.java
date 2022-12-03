@@ -1,5 +1,5 @@
 /**
- * @author Darshan Navadiya
+ * @version 1.0
  */
 public interface IStatus {
     void Record(String msg);

@@ -1,3 +1,8 @@
+/**
+ * Application class and entrypoint of the control flow.
+ * This class is a part of VIEW in MVC.
+ */
+
 public class UMLDiagramAndSkeletonGenerator {
 
     public static void main(String[] args) {

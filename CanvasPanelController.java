@@ -5,6 +5,12 @@ import java.awt.event.MouseMotionListener;
 import java.awt.*;
 
 
+/**
+ * This class implements CONTROLLER from MVC.
+ * This class has methods which acts as an interfaces to MODEL.
+ * @version 1.0
+ */
+
 public class CanvasPanelController implements MouseListener, MouseMotionListener {
 
     CanvasPanel canvasPanel;
@@ -12,6 +18,10 @@ public class CanvasPanelController implements MouseListener, MouseMotionListener
     Relationship currentRelationshipType = Relationship.AGGREGATION;
     DataSource dataSource;
 
+    /**
+     * This is Class Constructor
+     * @param canvasPanel
+     */
     CanvasPanelController(CanvasPanel canvasPanel) {
         this.canvasPanel = canvasPanel;
         this.dataSource = DataSource.getInstance();
@@ -19,6 +29,11 @@ public class CanvasPanelController implements MouseListener, MouseMotionListener
         canvasPanel.addMouseMotionListener(this);
     }
 
+    /**
+     * If clicked in a canvas panel somewhere collects information about classes
+     * and passes it to the model.
+     * @param e
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         // TODO Auto-generated method stub
@@ -80,6 +95,10 @@ public class CanvasPanelController implements MouseListener, MouseMotionListener
 
     }
 
+    /**
+     * Change the position of class object according to the drag position.
+     * @param e
+     */
     @Override
     public void mouseDragged(MouseEvent e) {
         // TODO Auto-generated method stub

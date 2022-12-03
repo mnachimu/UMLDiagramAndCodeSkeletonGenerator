@@ -3,7 +3,11 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.event.ActionListener;
 
-
+/**
+ * GUI class is responsible for displaying overall GUI .
+ * This class is part of VIEW in MVC.
+ * @version 1.0
+ */
 public class GUI extends JFrame implements ActionListener {
 
 	public CanvasPanel canvas;
@@ -13,6 +17,13 @@ public class GUI extends JFrame implements ActionListener {
 
 	public StatusBar statusBar;
 
+	/**
+	 * Class Constructor which creates the JFrame and has two panels and a Statusbar.
+	 * @param canvasPanel
+	 * @param displayPanel
+	 * @param jmenuBar
+	 * @param jStatusBar
+	 */
     public GUI(CanvasPanel canvasPanel, DisplayPanel displayPanel, MenuBar jmenuBar, StatusBar jStatusBar) {
         this.setTitle("CSE 564 Assignment Final");
         this.setSize(1050, 740);
