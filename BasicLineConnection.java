@@ -77,27 +77,27 @@ public class BasicLineConnection implements ClassConnection {
         if (Line2D.linesIntersect(
                 linePoint1.getX(), linePoint1.getY(),
                 linePoint2.getX(), linePoint2.getY(),
-                object.getBounds().getX(), object.getBounds().getY(),
-                object.getBounds().getX()+ object.getBounds().getWidth(), object.getBounds().getY())) {
-            return TOP;
-        } else if (Line2D.linesIntersect(
-                linePoint1.getX(), linePoint1.getY(),
-                linePoint2.getX(), linePoint2.getY(),
-                object.getBounds().getX(), object.getBounds().getY(),
-                object.getBounds().getWidth(), object.getBounds().getY() + object.getBounds().getHeight())) {
-            return LEFT;
-        } else if (Line2D.linesIntersect(
-                linePoint1.getX(), linePoint1.getY(),
-                linePoint2.getX(), linePoint2.getY(),
                 object.getBounds().getX() + object.getBounds().getWidth(), object.getBounds().getY() + object.getBounds().getHeight(),
                 object.getBounds().getX(), object.getBounds().getY() + object.getBounds().getHeight())) {
             return BOTTOM;
         } else if (Line2D.linesIntersect(
                 linePoint1.getX(), linePoint1.getY(),
                 linePoint2.getX(), linePoint2.getY(),
+                object.getBounds().getX(), object.getBounds().getY(),
+                object.getBounds().getX()+ object.getBounds().getWidth(), object.getBounds().getY())) {
+            return TOP;
+        } else if (Line2D.linesIntersect(
+                linePoint1.getX(), linePoint1.getY(),
+                linePoint2.getX(), linePoint2.getY(),
                 object.getBounds().getX() + object.getBounds().getWidth(), object.getBounds().getY() + object.getBounds().getHeight(),
                 object.getBounds().getX() + object.getBounds().getWidth(), object.getBounds().getY())) {
             return RIGHT;
+        }else if (Line2D.linesIntersect(
+                linePoint1.getX(), linePoint1.getY(),
+                linePoint2.getX(), linePoint2.getY(),
+                object.getBounds().getX(), object.getBounds().getY(),
+                object.getBounds().getWidth(), object.getBounds().getY() + object.getBounds().getHeight())) {
+            return LEFT;
         } else {
             return -1;
         }

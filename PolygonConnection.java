@@ -15,18 +15,27 @@ public class PolygonConnection extends BasicLineConnection {
             int x = (int) c1.getX();
             int y = (int) c1.getY();
             g.setColor(new Color(0, 100, 250));
+            Polygon p;
             if (slant1 == TOP) {
-                g.drawPolygon(new int[]{x, x-polygonHalfWidth, x, x+polygonHalfWidth},
+                p = new Polygon(new int[]{x, x-polygonHalfWidth, x, x+polygonHalfWidth},
                         new int[]{y,y-polygonHalfWidth, y-polygonHeight, y-polygonHalfWidth}, 4);
+                g.drawPolygon(p);
+                g.fillPolygon(p);
             } else if (slant1 == RIGHT) {
-                g.drawPolygon(new int[]{x, x+polygonHalfWidth, x+polygonHeight, x+polygonHalfWidth},
+                p = new Polygon(new int[]{x, x+polygonHalfWidth, x+polygonHeight, x+polygonHalfWidth},
                         new int[]{y, y-polygonHalfWidth, y+polygonHeight, y+polygonHalfWidth}, 4);
+                g.drawPolygon(p);
+                g.fillPolygon(p);
             } else if (slant1 == BOTTOM) {
-                g.drawPolygon(new int[]{x, x-polygonHalfWidth, x, x+polygonHalfWidth},
+                p = new Polygon(new int[]{x, x-polygonHalfWidth, x, x+polygonHalfWidth},
                         new int[]{y,y+polygonHalfWidth, y, y+polygonHalfWidth}, 4);
+                g.drawPolygon(p);
+                g.fillPolygon(p);
             } else if (slant1 == LEFT) {
-                g.drawPolygon(new int[]{x, x-polygonHalfWidth, x-polygonHeight, x-polygonHalfWidth},
+                p = new Polygon(new int[]{x, x-polygonHalfWidth, x-polygonHeight, x-polygonHalfWidth},
                         new int[]{y,y-polygonHalfWidth, y, y+polygonHalfWidth}, 4);
+                g.drawPolygon(p);
+                g.fillPolygon(p);
             }
         } else {
             nextConnection.handleConnectionForRelationship(g, c1, c2, slant1, slant2, relationshipType);
