@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.geom.Line2D;
 
 /**
  * Class for the representation of class rectangle in the canvas panel.
@@ -51,7 +52,7 @@ public class ClassObject {
      */
     public int getX() {
         System.out.println("The coordinates.x and bounds.x " + coordinates.getX() + " " + bounds.x);
-        return coordinates.getX();
+        return (int)coordinates.getX();
     }
 
     /**
@@ -60,7 +61,7 @@ public class ClassObject {
      */
     public int getY() {
         System.out.println("The coordinates.x and bounds.x " + coordinates.getY() + " " + bounds.y);
-        return coordinates.getY();
+        return (int)coordinates.getY();
     }
 
     public boolean checkIfWithinBounds(int x, int y) {
@@ -108,6 +109,11 @@ public class ClassObject {
     public void unselectedState(Graphics g) {
         g.setColor(new Color(242, 213, 145));
         g.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
+    }
+
+
+    public Rectangle getBounds() {
+        return this.bounds;
     }
 
     /**

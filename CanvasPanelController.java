@@ -14,7 +14,7 @@ public class CanvasPanelController implements MouseListener, MouseMotionListener
 
     CanvasPanel canvasPanel;
 
-    Relationship currentRelationshipType = Relationship.AGGREGATION;
+    Relationship currentRelationshipType = Relationship.COMPOSITION;
     DataSource dataSource;
 
     /**
@@ -43,8 +43,8 @@ public class CanvasPanelController implements MouseListener, MouseMotionListener
             RecordStatus.getInstance().record(
                     "New Relationship between classes"
                             + dataSource.classObjectsLists.get(dataSource.selectedObject).getClassName()
-                            + "and " + dataSource.classObjectsLists.get(click).getClassName()
-                            +  "are being created ");
+                            + " and " + dataSource.classObjectsLists.get(click).getClassName()
+                            +  " are being created ");
             currentRelationshipType = (Relationship) JOptionPane.showInputDialog(
                     e.getComponent(),
                     "The type of relation between the classes",
@@ -54,8 +54,8 @@ public class CanvasPanelController implements MouseListener, MouseMotionListener
                     Relationship.values(),
                     currentRelationshipType);
             RecordStatus.getInstance().record(currentRelationshipType.name()
-                    + " is added between " + dataSource.classObjectsLists.get(dataSource.selectedObject)
-                    + " and " + dataSource.classObjectsLists.get(click));
+                    + " is added between " + dataSource.classObjectsLists.get(dataSource.selectedObject).getClassName()
+                    + " and " + dataSource.classObjectsLists.get(click).getClassName());
             dataSource.addRelationship(currentRelationshipType, dataSource.selectedObject, click);
             dataSource.selectedObject = -1;
             dataSource.setSelectedObject(-1);
@@ -73,12 +73,11 @@ public class CanvasPanelController implements MouseListener, MouseMotionListener
                 o.setClassName(name);
             RecordStatus.getInstance().record("Class " + name +" created");
             dataSource.addClassObject(o);
-            
 
         } else {
-            dataSource.setSelectedObject(click);
             if (click != -1)
                 RecordStatus.getInstance().record(dataSource.classObjectsLists.get(click).getClassName() + " is selected");
+            dataSource.setSelectedObject(click);
         }
 
 //        canvasPanel.repaint();

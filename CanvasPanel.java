@@ -1,9 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import java.util.List;
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -13,14 +10,13 @@ import java.util.Observer;
  * @version 1.0
  */
 public class CanvasPanel extends JPanel implements Observer {
-	// view
 	private static final int width = 625;
 	private static final int height = 600;
 
 	public BufferedImage canvas;
 
 	/**
-	 * Class Constructor which creats a BufferedImage object
+	 * Class Constructor which creates a BufferedImage object
 	 * @param x X coordinate from where the canvas panel should start
 	 * @param y Y coordinate from where the canvas panel should start.
 	 */
@@ -41,7 +37,7 @@ public class CanvasPanel extends JPanel implements Observer {
 	@Override
 	public void paintComponent(Graphics g) {
 		 super.paintComponent(g);
-
+		BasicLineConnection bc = new ArrowConnectionForAssociation(new PolygonConnection(new TriangleCloseConnectionForInheritance(null)));
 		 g.setColor(new Color(242, 213, 145));
 
 		DataSource dataSource = DataSource.getInstance();
@@ -51,16 +47,7 @@ public class CanvasPanel extends JPanel implements Observer {
 		for (int i=0 ; i< maxLen; i++) {
 			for (int j=0 ; j<maxLen; j++) {
 				if (!( rels[i][j] == null || rels[i][j] == Relationship.NO_RELATION)) {
-					System.out.println(rels[i][j].name());
-					g.drawLine(dataSource.classObjectsLists.get(i).getX(),
-							dataSource.classObjectsLists.get(i).getY(),
-							dataSource.classObjectsLists.get(j).getX(),
-							dataSource.classObjectsLists.get(j).getY());
-					switch (rels[i][j]) { // change it to arrows, use chain of responsibilities for drawing the line
-						case AGGREGATION -> System.out.println("Aggregation between " + i + " and " + j);
-						case ASSOCIATION -> System.out.println("Association between " + i + " and " + j);
-						case INHERITANCE -> System.out.println("Inheritance between " + i + " and " + j);
-					}
+					bc.handleConnection(g, dataSource.classObjectsLists.get(i), dataSource.classObjectsLists.get(j), rels[i][j]);
 				}
 			}
 		}
