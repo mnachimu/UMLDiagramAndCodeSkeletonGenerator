@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -77,7 +76,7 @@ public class DisplayPanel extends JScrollPane implements Observer {
                         switch (rels[i][j]) {
                             case NO_RELATION:
                                 break;
-                            case AGGREGATION:
+                            case COMPOSITION:
                                 input += "\t" + dataSource.classObjectsLists.get(j).getClassName() + "\n";
                                 break;
                             case ASSOCIATION:

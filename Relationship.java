@@ -3,7 +3,7 @@
  */
 public enum Relationship {
     NO_RELATION(0),
-    AGGREGATION(1),
+    COMPOSITION(1),
     ASSOCIATION(2),
     INHERITANCE(3),
     ;
