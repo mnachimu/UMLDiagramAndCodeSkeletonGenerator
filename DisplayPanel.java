@@ -69,7 +69,7 @@ public class DisplayPanel extends JScrollPane implements Observer {
             for (int i = 0; i < maxLen; i++ ) {     // Object branch
                 System.out.println("Object " + i);
                 input = "";
-                input += dataSource.classObjectsLists.get(i).getClassName();
+                input += "class " + dataSource.classObjectsLists.get(i).getClassName();
                 for (int j = 0; j < maxLen; j++) {  // Relationship branch
                     if (!((rels[i][j] == null) || (rels[i][j] == Relationship.NO_RELATION))) {
                         System.out.print("Relation between " + i + " and " + j + ": ");
